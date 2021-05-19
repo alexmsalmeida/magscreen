@@ -2,7 +2,7 @@
 
 [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) workflow to identify novel microbial species from a set of genomes.
 
-Genomes are first quality-filtered based on the [CheckM](https://github.com/Ecogenomics/CheckM) stats then compared against a genome database using [Mash](https://github.com/marbl/Mash) and [MUMmmer](http://mummer.sourceforge.net/). Unknown hits are extracted, clustered at species-level using [dRep](https://drep.readthedocs.io/en/latest/) and further quality-filtered with [GUNC](https://github.com/grp-bork/gunc).
+Genomes are first quality-filtered based on the [CheckM](https://github.com/Ecogenomics/CheckM) stats then compared against a genome database using [Mash](https://github.com/marbl/Mash) and [MUMmmer](http://mummer.sourceforge.net/). Unknown hits are extracted, clustered at species-level using [dRep](https://drep.readthedocs.io/en/latest/) and further quality-controlled with [GUNC](https://github.com/grp-bork/gunc).
 
 ## Installation
 
