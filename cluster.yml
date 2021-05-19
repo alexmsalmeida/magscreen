@@ -1,0 +1,20 @@
+__default__:
+    mem: 5000
+    nCPU: 1
+    name: "{rule}"
+    output: "{OUTPUT_DIR}/logs/{rule}.log"
+
+mash_compare:
+    mem : 10000
+    nCPU: 8
+    output: "{OUTPUT_DIR}/logs/{rule}.log"
+
+cluster_unknown:
+    mem : 30000
+    nCPU: 16
+    output: "{OUTPUT_DIR}/logs/{rule}.log"
+
+gunc_check:
+    mem : 10000
+    nCPU: 4
+    output: "{OUTPUT_DIR}/logs/{rule}.log"

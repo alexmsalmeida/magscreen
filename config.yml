@@ -1,0 +1,16 @@
+# Input directory
+
+input: # must contain .fa files
+    fasta_dir: "test/input"
+    stats_csv: "test/input/checkm.csv"
+
+# output directory
+
+output: # directory to store results (one folder per input file)
+    "test/output"
+
+# required database
+
+databases:
+    mash: "/hps/nobackup2/production/metagenomics/databases/human-gut_resource/mash_databases/uhgg_v1.1.msh"
+    gunc: "/nfs/production/interpro/metagenomics/mags-scripts/gunc_db/gunc_db_2.0.4.dmnd"
