@@ -6,7 +6,7 @@ input: # must contain .fa files
 
 # output directory
 
-output: # directory to store results (one folder per input file)
+output: # directory to store results
     "test/output"
 
 # required database
