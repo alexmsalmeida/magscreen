@@ -28,4 +28,8 @@ snakemake --use-conda -j 50 --cluster-config cluster.yml --cluster 'bsub -n {clu
 
 ## Output
 
-The main output is located in `drep/dereplicated_genomes` which contains the best-quality representative genomes (`.fa` files) of each new species, and `gunc/GUNC.maxCSS_level.tsv` with further quality stats of the new species.
+The main output is located in the directory `new_species/` which contains the best-quality representative genomes (`.fa` files) of each new species. New species matching all of the following criteria are filtered out:
+
+* Flagged by GUNC: clade_separation_score >0.45; contamination_portion >0.05; reference_representation_score >0.5
+* Are singletons (dRep clusters with only one member)
+* Are <90% complete based on CheckM
