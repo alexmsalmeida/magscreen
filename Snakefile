@@ -67,9 +67,11 @@ rule mash_compare:
     output:
         hits = OUTPUT_DIR+"/mash/mash_dist.tsv",
         best = OUTPUT_DIR+"/mash/mash_dist_best.tsv"
+    conda:
+        "envs/mashdiff.yml"
     shell:
         """
-        tools/mash dist -p 8 {input.mash_db} {input.fasta}/*fa > {output.hits}
+        mash dist -p 8 {input.mash_db} {input.fasta}/*fa > {output.hits}
         tools/bestMash.py {output.hits} > {output.best}
         """
 
@@ -81,11 +83,15 @@ rule dnadiff_compare:
         OUTPUT_DIR+"/dnadiff/{id}/{id}.parsed"
     params:
         fasta = OUTPUT_DIR+"/mags_filtered/{id}.fa",
-        prefix = OUTPUT_DIR+"/dnadiff/{id}/{id}"
+        prefix = OUTPUT_DIR+"/dnadiff/{id}/{id}",
+        perl = "$CONDA_PREFIX/bin/perl",
+        dnadiff = "$CONDA_PREFIX/bin/dnadiff"
+    conda:
+        "envs/mashdiff.yml"
     shell:
         """
         ref=$(grep {params.fasta} {input} | cut -f2)
-        tools/MUMmer3.23/dnadiff ${{ref}} {params.fasta} -p {params.prefix}
+        {params.perl} {params.dnadiff} ${{ref}} {params.fasta} -p {params.prefix}
         tools/parse_dnadiff.py {params.prefix}.report {input} > {output}
         """
 
