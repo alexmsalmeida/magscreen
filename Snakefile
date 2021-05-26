@@ -65,20 +65,18 @@ rule mash_compare:
         fasta = OUTPUT_DIR+"/mags_filtered",
         mash_db = config["databases"]["mash"]
     output:
-        hits = OUTPUT_DIR+"/mash/mash_dist.tsv",
-        best = OUTPUT_DIR+"/mash/mash_dist_best.tsv"
+        OUTPUT_DIR+"/mash_dist_best.tsv"
     conda:
         "envs/mashdiff.yml"
     shell:
         """
-        mash dist -p 8 {input.mash_db} {input.fasta}/*fa > {output.hits}
-        tools/bestMash.py {output.hits} > {output.best}
+        mash dist -p 8 {input.mash_db} {input.fasta}/*fa | tools/bestMash.py > {output}
         """
 
 # dnadiff comparison
 rule dnadiff_compare:
     input:
-        OUTPUT_DIR+"/mash/mash_dist_best.tsv"
+        OUTPUT_DIR+"/mash_dist_best.tsv"
     output:
         OUTPUT_DIR+"/dnadiff/{id}/{id}.parsed"
     params:
