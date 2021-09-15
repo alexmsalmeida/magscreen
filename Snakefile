@@ -1,4 +1,4 @@
-# snakemake workflow for screening mags against existing database
+# snakemke workflow for screening mags against existing database
 
 import os
 import glob
@@ -52,7 +52,8 @@ rule mags_filter:
     input:  
         INPUT_DIR,
     output:
-        directory(OUTPUT_DIR+"/mags_filtered")
+        output_dir = directory(OUTPUT_DIR+"/mags_filtered/"),
+        output_files = expand(OUTPUT_DIR+"/mags_filtered/{id}.fa", id=genomes_files)
     run:
         if not os.path.exists(output[0]):
             os.makedirs(output[0])
@@ -62,21 +63,21 @@ rule mags_filter:
 # mash compare
 rule mash_compare:
     input:
-        fasta = OUTPUT_DIR+"/mags_filtered",
+        fasta = OUTPUT_DIR+"/mags_filtered/{id}.fa",
         mash_db = config["databases"]["mash"]
     output:
-        OUTPUT_DIR+"/mash_dist_best.tsv"
+        OUTPUT_DIR+"/mash/{id}.tsv"
     conda:
         "envs/mashdiff.yml"
     shell:
         """
-        mash dist -p 8 {input.mash_db} {input.fasta}/*fa | tools/bestMash.py > {output}
+        mash dist -p 8 {input.mash_db} {input.fasta} | tools/bestMash.py > {output}
         """
 
 # dnadiff comparison
 rule dnadiff_compare:
     input:
-        OUTPUT_DIR+"/mash_dist_best.tsv"
+        OUTPUT_DIR+"/mash/{id}.tsv"
     output:
         OUTPUT_DIR+"/dnadiff/{id}/{id}.parsed"
     params:
