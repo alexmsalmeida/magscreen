@@ -5,7 +5,7 @@ __default__:
     output: "{OUTPUT_DIR}/logs/{rule}.log"
 
 mash_compare:
-    mem : 10000
+    mem : 5000
     nCPU: 8
     output: "{OUTPUT_DIR}/logs/{rule}.log"
 

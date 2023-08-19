@@ -2,4 +2,5 @@ name: gunc
 channels:
   - bioconda
 dependencies:
-  - gunc
+  - pandas=1.5.1
+  - gunc=1.0.3=pyhdfd78af_0

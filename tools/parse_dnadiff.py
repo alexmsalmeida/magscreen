@@ -31,6 +31,6 @@ with open(sys.argv[2], "rU") as f:
         query = os.path.basename(cols[0]).split(".fa")[0]
         if query == base:
             dist = cols[2]
-            ref = os.path.basename(cols[1])
+            ref = os.path.basename(cols[1]).split(".fa")[0]
 
 print "%s\t%s\t%i\t%.2f\t%i\t%.2f\t%.2f\t%.4f" % (base, ref, lenref, float(aliref), lenquer, float(alique), float(ident), float(dist)) 

@@ -1,16 +1,16 @@
-# Input directory
+# input directory
 
 input: # must contain .fa files
-    fasta_dir: "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/metawrap_bins"
-    stats_csv: "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/drep/mags_checkm.csv"
+    fasta_dir: "/rds/user/aa2369/hpc-work/scripts/snakemake/magscreen/test/input"
+    stats_csv: "/rds/user/aa2369/hpc-work/scripts/snakemake/magscreen/test/input/checkm.csv"
 
 # output directory
 
 output: # directory to store results
-    "/hps/nobackup2/production/metagenomics/aalmeida/project_latinbiota/magscreen_wf"
+    "/rds/user/aa2369/hpc-work/scripts/snakemake/magscreen/test/output"
 
 # required database
 
 databases:
-    mash: "/hps/nobackup2/production/metagenomics/databases/human-gut_resource/mash_databases/uhgg_v1.1.msh"
-    gunc: "/nfs/production/interpro/metagenomics/mags-scripts/gunc_db/gunc_db_2.0.4.dmnd"
+    mash: "/rfs/project/rfs-42V0sRc5Rk8/databases/mash/uhgg_v1.0_all.msh"
+    gunc: "/rfs/project/rfs-42V0sRc5Rk8/databases/gunc/gunc_db_progenomes2.1.dmnd"

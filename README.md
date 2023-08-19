@@ -15,15 +15,15 @@ git clone https://github.com/alexmsalmeida/magscreen.git
 
 ## How to run
 
-1. Edit `config.yml` file to point to the <b>input</b>, <b>output</b> and <b>databases</b> directories. Input directory should contain the `.fa` assemblies to analyse and a `.csv` file with [CheckM](https://github.com/Ecogenomics/CheckM) completeness and contamination scores. The <b>databases</b> folder should contain the [GUNC](https://github.com/grp-bork/gunc) diamond database and a custom [Mash](https://github.com/marbl/Mash) database (`.msh`) with the genomes you want to screen against.
+1. Edit `config.yml` with the selected <b>input</b>, <b>output</b> and <b>databases</b> arguments. The input should point to the paths of the directory containing the `.fa` assemblies to analyse and a path to the `.csv` file with [CheckM](https://github.com/Ecogenomics/CheckM) completeness and contamination scores. The <b>databases</b> folder should contain the [GUNC](https://github.com/grp-bork/gunc) diamond database and a custom [Mash](https://github.com/marbl/Mash) database (`.msh`) with the genomes you want to screen against.
 
 2. (option 1) Run the pipeline locally (adjust `-j` based on the number of available cores)
 ```
 snakemake --use-conda -k -j 4
 ```
-2. (option 2) Run the pipeline on a cluster (e.g., LSF)
+2. (option 2) Run the pipeline on a cluster (e.g., SLURM)
 ```
-snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'bsub -n {cluster.nCPU} -M {cluster.mem} -o {cluster.output}'
+snakemake --use-conda -k -j 100 --cluster-config cluster.yml --cluster 'sbatch -A ALMEIDA-SL3-CPU -p icelake-himem --time=12:00:00 --ntasks={cluster.nCPU} --mem={cluster.mem} -o {cluster.output}'
 ```
 
 ## Output

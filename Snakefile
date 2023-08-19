@@ -84,14 +84,24 @@ rule dnadiff_compare:
         fasta = OUTPUT_DIR+"/mags_filtered/{id}.fa",
         prefix = OUTPUT_DIR+"/dnadiff/{id}/{id}",
         perl = "$CONDA_PREFIX/bin/perl",
-        dnadiff = "$CONDA_PREFIX/bin/dnadiff"
+        dnadiff = "$CONDA_PREFIX/bin/dnadiff",
+        dnadiff_dir = OUTPUT_DIR+"/dnadiff/{id}"
     conda:
         "envs/mashdiff.yml"
     shell:
         """
         ref=$(grep {params.fasta} {input} | cut -f2)
-        {params.perl} {params.dnadiff} ${{ref}} {params.fasta} -p {params.prefix}
-        tools/parse_dnadiff.py {params.prefix}.report {input} > {output}
+        if [[ ${{ref}} == *.gz ]]
+        then
+            fasta=$(echo $(basename ${{ref}}) | awk -F '.gz' '{{print$1}}')
+            gunzip -c ${{ref}} > {params.dnadiff_dir}/${{fasta}}
+            {params.perl} {params.dnadiff} {params.dnadiff_dir}/${{fasta}} {params.fasta} -p {params.prefix}
+            tools/parse_dnadiff.py {params.prefix}.report {input} > {output}
+            rm -f {params.dnadiff_dir}/${{fasta}}
+        else
+            {params.perl} {params.dnadiff} ${{ref}} {params.fasta} -p {params.prefix}
+            tools/parse_dnadiff.py {params.prefix}.report {input} > {output}
+        fi
         """
 
 rule merge_dnadiff:
