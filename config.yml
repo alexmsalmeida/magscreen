@@ -1,16 +1,16 @@
 # input directory
 
 input: # must contain .fa files
-    fasta_dir: "/rds/user/aa2369/hpc-work/scripts/snakemake/magscreen/test/input"
-    stats_csv: "/rds/user/aa2369/hpc-work/scripts/snakemake/magscreen/test/input/checkm.csv"
+    fasta_dir: "/rds/project/rds-aFEMMKDjWlo/rarora/mags/genomes"
+    stats_csv: "/rds/project/rds-aFEMMKDjWlo/rarora/mags/checkm.csv"
 
 # output directory
 
 output: # directory to store results
-    "/rds/user/aa2369/hpc-work/scripts/snakemake/magscreen/test/output"
+    "/rds/project/rds-aFEMMKDjWlo/rarora/mags/magscreen"
 
 # required database
 
 databases:
-    mash: "/rfs/project/rfs-42V0sRc5Rk8/databases/mash/uhgg_v1.0_all.msh"
-    gunc: "/rfs/project/rfs-42V0sRc5Rk8/databases/gunc/gunc_db_progenomes2.1.dmnd"
+    mash: "/rds/project/rds-aFEMMKDjWlo/rfs_data/databases/mash/uhgg_v1.0_all.msh"
+    gunc: "/rds/project/rds-aFEMMKDjWlo/rfs_data/databases/gunc/gunc_db_progenomes2.1.dmnd"

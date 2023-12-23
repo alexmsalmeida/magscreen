@@ -112,7 +112,7 @@ rule merge_dnadiff:
     shell:
         """
         echo -e 'qry\tref\tref_len\tref_cov\tqry_len\tqry_cov\tani\tmash' > {output}
-        cat {input} >> {output}
+        for i in {input}; do cat ${{i}} >> {output}; done
         """
 
 # extract unknown mags
